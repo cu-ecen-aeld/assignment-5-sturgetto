@@ -1,0 +1,26 @@
+#!/bin/sh
+
+case "$1" in
+  start)
+    echo "Starting ldd modules"
+    cd /lib/modules/6.1.44/kernel/drivers/char
+    ./scull_load
+    cd /lib/modules/6.1.44/kernel/drivers/misc
+    ./module_load faulty
+    modprobe hello
+    ;;
+  stop)
+    echo "Stopping ldd modules"
+    cd /lib/modules/6.1.44/kernel/drivers/char
+    ./scull_unload
+    cd /lib/modules/6.1.44/kernel/drivers/misc
+    ./module_unload faulty
+    rmmod hello
+    ;;
+  *)
+    echo "Usage: $0 {start|stop}"
+    exit 1
+    ;;
+esac
+
+exit 0
