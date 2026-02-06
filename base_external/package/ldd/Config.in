@@ -1,4 +1,5 @@
 config BR2_PACKAGE_LDD
 	bool "ldd"
+	default y
 	help
 	  Includes the ldd, misc_module and scull modules in the kernel.
