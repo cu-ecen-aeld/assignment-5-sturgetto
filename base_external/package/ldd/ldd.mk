@@ -16,6 +16,9 @@ LDD_GIT_SUBMODULES = YES
 LDD_MODULE_SUBDIRS = misc-modules scull
 LDD_MODULE_MAKE_OPTS = KVERSION=$(LINUX_VERSION_PROBED)
 
+$(eval $(kernel-module))
+$(eval $(autotools-package))
+
 define LDD_CONFIGURE_CMDS
 	echo "Configure LDD!"
 endef
@@ -36,7 +39,4 @@ define LDD_INSTALL_TARGET_CMDS
         $(INSTALL) -m 0755 $(@D)/misc-modules/module_load $(TARGET_DIR)/lib/modules/6.1.44/kernel/drivers/misc/
         $(INSTALL) -m 0755 $(@D)/misc-modules/module_unload $(TARGET_DIR)/lib/modules/6.1.44/kernel/drivers/misc/
 endef
-
-$(eval $(kernel-module))
-$(eval $(autotools-package))
 
